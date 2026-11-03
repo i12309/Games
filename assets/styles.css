@@ -23,3 +23,27 @@
 @media(max-width:1120px){.game-cards .ready-card:last-child{display:block}}
 @media(max-width:680px){.game-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.game-feature-card{grid-column:span 2}}
 @media(max-width:560px){.ready-card .upcoming-icon{height:72px;gap:4px}.card-pair{font-size:24px;width:42px;height:52px;border-radius:10px}.maze-card-illustration{font-size:23px}}
+
+/* Six-game catalog: no cards disappear at tablet widths. */
+.game-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.game-feature-card{grid-column:span 2}
+.game-cards .upcoming-card:last-child{display:block}
+.nuts-card-illustration{background:linear-gradient(135deg,#fff1e2,#ffe9d4);gap:0;justify-content:center}
+.nuts-preview{font-size:51px;line-height:1;text-shadow:0 4px 0 #623c2250,0 8px 8px #d9781930}
+.nuts-preview-one{color:#f05e34;transform:rotate(-14deg) translateX(13px)}.nuts-preview-two{color:#31bda6;transform:translateY(7px);z-index:1}.nuts-preview-three{color:#8c59de;transform:rotate(15deg) translateX(-13px)}
+.arrows-card-illustration{background:linear-gradient(135deg,#ebf4ff,#ebedff);gap:9px}
+.arrows-card-illustration span{font-size:47px;font-weight:950;line-height:1;color:#32bfcf;text-shadow:0 2px 0 #2a436029}.arrows-card-illustration span:nth-child(2){color:#ec5c86;transform:translateY(-9px)}.arrows-card-illustration span:nth-child(3){color:#7459da}
+.hex-card-illustration{background:linear-gradient(130deg,#eff4ff,#f8eeff);gap:2px}.hex-card-illustration span{display:grid;place-items:center;width:55px;height:59px;font-size:23px;font-weight:900;color:white;background:#f155aa;clip-path:polygon(50% 0,96% 25%,96% 75%,50% 100%,4% 75%,4% 25%);filter:drop-shadow(0 5px 2px #1c335333)}.hex-card-illustration span:nth-child(2){background:#55bb57;transform:translateY(-13px)}.hex-card-illustration span:nth-child(3){background:#329bd6}
+@media(max-width:1120px){.game-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.game-feature-card{grid-column:span 2}}
+@media(max-width:560px){.game-cards{gap:10px}.nuts-preview{font-size:33px}.arrows-card-illustration span{font-size:29px}.hex-card-illustration span{width:40px;height:43px;font-size:16px}}
+/* Uniform catalog grid: six games fill two rows without an orphaned card. */
+.game-cards{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}
+.game-cards>.game-feature-card{grid-column:auto;display:flex;flex-direction:column}
+.game-feature-illustration{min-height:140px;height:140px;flex:0 0 140px}
+.game-feature-body{flex:1;display:flex;flex-direction:column;align-items:flex-start;padding:20px}
+.game-feature-body .feature-cta{margin-top:auto;padding-top:10px}
+.game-cards>.upcoming-card{display:flex;flex-direction:column;padding:20px}
+.game-cards>.upcoming-card .upcoming-icon{height:140px;flex:0 0 140px}
+.game-cards>.upcoming-card .feature-cta{margin-top:auto;padding-top:10px}
+@media(max-width:900px){.game-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.game-cards>.game-feature-card{grid-column:auto}}
+@media(max-width:560px){.game-cards>.upcoming-card{padding:12px}.game-feature-body{padding:12px}.game-feature-illustration{min-height:90px;height:90px;flex:0 0 90px}.game-cards>.upcoming-card .upcoming-icon{height:90px;flex:0 0 90px}.game-feature-body h3,.upcoming-card h3{font-size:14px}.game-feature-body p,.upcoming-card p{font-size:10px}.game-feature-body .feature-cta{font-size:10px}}
