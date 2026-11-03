@@ -4,62 +4,62 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f8fbff">
-  <meta name="description" content="Игроланд: восемь детских игр без рекламы и регистрации. Раскраски, пары, лабиринты, маджонг и головоломки для планшета.">
-  <title>Игроланд — каталог детских игр</title>
+  <meta name="description" content="Игроланд: 8 игр и 4 учебные мастерские. Счёт, арифметика, чтение историй, логика и пространственные задачи для детей 5–7 лет.">
+  <title>Игроланд — играем и учимся</title>
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="stylesheet" href="assets/home.css">
+  <link rel="stylesheet" href="assets/learning-home.css">
 </head>
 <body class="catalog-page">
   <div class="site-shell">
     <header class="site-header">
-      <a class="brand" href="index.html" aria-label="Игроланд, главная">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>игроланд<span class="brand-dot">.</span></span>
-      </a>
-      <span class="site-header-note"><span class="status-dot"></span> 8 игр · для планшета и компьютера</span>
+      <a class="brand" href="index.html" aria-label="Игроланд, главная"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>игроланд<span class="brand-dot">.</span></span></a>
+      <span class="site-header-note"><span class="status-dot"></span> Игры и учебные мастерские</span>
     </header>
     <main>
+      <nav class="catalog-tabs" aria-label="Разделы каталога">
+        <a href="index.html" data-catalog-section="all">Всё вместе</a>
+        <a href="index.html?section=learn" data-catalog-section="learn">Учимся играя</a>
+        <a href="index.html?section=play" data-catalog-section="play">Отдыхаем</a>
+      </nav>
       <section class="hero hero-featured" id="featuredGame" aria-labelledby="featuredTitle">
         <div class="hero-copy">
-          <span class="eyebrow"><span class="eyebrow-icon">✦</span> СЛУЧАЙНАЯ ИГРА ДЛЯ ТЕБЯ</span>
+          <span class="eyebrow"><span class="eyebrow-icon">✦</span> СЛУЧАЙНОЕ ПРИКЛЮЧЕНИЕ ДЛЯ ТЕБЯ</span>
           <span class="featured-category" id="featuredCategory">Игра дня</span>
           <h1 id="featuredTitle">Выбираем приключение!</h1>
-          <p id="featuredDescription">Каждый раз на главной тебя ждёт новая игра. Попробуй что-нибудь интересное!</p>
+          <p id="featuredDescription">Можно поиграть, узнать новое и попробовать свои силы. Без спешки, рекламы и регистрации.</p>
           <div class="featured-actions">
-            <a class="primary-link" id="featuredPlay" href="games/mahjong/index.html?level=garden">Начать игру <span aria-hidden="true">→</span></a>
+            <a class="primary-link" id="featuredPlay" href="games/number-garden/index.html?level=add5">Начать игру <span aria-hidden="true">→</span></a>
             <button type="button" class="feature-reroll" id="featuredReroll" aria-label="Показать другую игру"><span aria-hidden="true">↻</span> Другая игра</button>
           </div>
           <div class="hero-features"><span>✓ Без регистрации</span><span>✓ Без рекламы</span><span>✓ Для маленьких пальчиков</span></div>
         </div>
         <div class="hero-paint hero-showcase" aria-hidden="true">
           <div class="hero-showcase-halo"></div>
-          <div class="hero-showcase-card">
-            <span class="hero-showcase-label" id="featuredVisualCategory">ИГРОЛАНД</span>
-            <div class="hero-showcase-symbols" id="featuredSymbols"><span>🌸</span><span>🐼</span><span>🌙</span><span>🦋</span></div>
-            <strong id="featuredVisualTitle">Маджонг</strong>
-            <span id="featuredVisualCaption">Собери все пары!</span>
-          </div>
+          <div class="hero-showcase-card"><span class="hero-showcase-label" id="featuredVisualCategory">ИГРОЛАНД</span><div class="hero-showcase-symbols" id="featuredSymbols"><span>2</span><span>+</span><span>3</span><span>5</span></div><strong id="featuredVisualTitle">Числовой сад</strong><span id="featuredVisualCaption">Учимся складывать!</span></div>
           <span class="hero-float-star star-a">✦</span><span class="hero-float-star star-b">✧</span>
         </div>
       </section>
+      <section class="learning-strip" aria-labelledby="learning-heading">
+        <div><span class="section-kicker">НОВОЕ · УЧИМСЯ ИГРАЯ</span><h2 id="learning-heading">Маленькие шаги к большим открытиям</h2><p>Сначала понятный пример, затем 5–6 заданий. Считаем предметы, читаем истории, находим правила и строим маршруты. Без таймеров и штрафов за ошибки.</p></div>
+        <div class="learning-starts"><a href="games/number-garden/index.html?level=add5">Первые сложения →</a><a href="games/reading-stories/index.html?level=phrases">Читаем вместе →</a><a href="index.html?section=learn">Все занятия →</a></div>
+      </section>
       <section class="catalog-section" aria-labelledby="games-heading">
-        <div class="section-head">
-          <div><span class="section-kicker">НАШИ ИГРЫ</span><h2 id="games-heading">Во что поиграем?</h2></div>
-          <span class="section-count" id="gameCount">8 игр готовы</span>
-        </div>
+        <div class="section-head"><div><span class="section-kicker">НАШИ МАСТЕРСКИЕ И ИГРЫ</span><h2 id="games-heading">Что попробуем сегодня?</h2></div><span class="section-count" id="gameCount">12 игр и занятий</span></div>
         <div class="game-cards" id="gameCards"></div>
       </section>
       <section class="catalog-section level-section" aria-labelledby="levels-heading">
-        <div class="section-head">
-          <div><span class="section-kicker">ВЫБИРАЙ ПРИКЛЮЧЕНИЕ</span><h2 id="levels-heading">Уровни разных игр</h2><p class="section-subtitle">Раскраски, лабиринты, головоломки и маджонг — всё вперемешку. Нажми на понравившийся уровень.</p></div>
-          <button type="button" class="level-refresh" id="refreshLevels"><span aria-hidden="true">↻</span> Другие уровни</button>
-        </div>
+        <div class="section-head"><div><span class="section-kicker">ВЫБИРАЙ ПРИКЛЮЧЕНИЕ</span><h2 id="levels-heading">Уровни и маленькие занятия</h2><p class="section-subtitle">Учебные задания и игровые уровни вперемешку. Переключи раздел наверху, чтобы выбрать только обучение или отдых.</p></div><button type="button" class="level-refresh" id="refreshLevels"><span aria-hidden="true">↻</span> Другие уровни</button></div>
         <div class="level-gallery" id="levelGallery"></div>
       </section>
+      <noscript><p>Для каталога включите JavaScript. Учебные игры: <a href="games/number-garden/index.html">числа</a>, <a href="games/reading-stories/index.html">чтение</a>, <a href="games/logic-lab/index.html">логика</a>, <a href="games/robot-route/index.html">маршруты</a>.</p></noscript>
     </main>
-    <footer class="site-footer">Игроланд · Детские игры без рекламы и внешних сервисов · Прогресс хранится на твоём устройстве</footer>
+    <footer class="site-footer">Игроланд · Играем и учимся без рекламы · Прогресс хранится на твоём устройстве</footer>
   </div>
   <script src="games/coloring/art-data.js"></script>
   <script src="assets/game-registry.js"></script>
+  <script src="assets/learning-registry.js"></script>
+  <script src="assets/learning-home.js"></script>
   <script src="assets/catalog.js"></script>
 </body>
 </html>
