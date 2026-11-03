@@ -13,7 +13,7 @@
 7. Звук необязателен, выключен по умолчанию: `Igroland.sound(...)`, `Igroland.soundEnabled()` и `Igroland.setSound(...)`.
 8. Проверять сохранённое состояние перед применением: localStorage может быть повреждён или недоступен.
 9. Алгоритмы и правила по возможности держать в отдельном модуле без DOM, чтобы тестировать их в Node.
-10. Добавить тест в `tests/` и проверить `node tests/smoke.js`, `node tests/new-games.js`, `node tests/mahjong.js`.
+10. Добавить тест в `tests/` и проверить `node tests/smoke.js`, `node tests/new-games.js`, `node tests/mahjong.js`, `node tests/marble-shooter.js`.
 
 ## Критерии приёмки
 

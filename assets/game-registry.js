@@ -73,6 +73,96 @@
         { title: 'Старинный храм', detail: '44 фишки · 2 этажа', difficulty: 'medium', icon: '🏯', link: 'games/mahjong/index.html?level=temple' },
         { title: 'Черепашка', detail: '68 фишек · 3 этажа', difficulty: 'hard', icon: '🐢', link: 'games/mahjong/index.html?level=turtle' }
       ]
+    },
+    {
+      "id": "marble-shooter",
+      "title": "Шариковый лабиринт",
+      "short": "Три шарика — и волшебная цепочка!",
+      "description": "Прицеливайся и стреляй цветными шариками по извилистой дорожке. Собирай три одного цвета, запускай цепные реакции и проходи десять уровней.",
+      "category": "Аркада",
+      "icon": "🔮",
+      "visual": [
+        "🔵",
+        "🟡",
+        "🟣",
+        "✨"
+      ],
+      "color": "#438edc",
+      "tint": "#e8f4ff",
+      "link": "games/marble-shooter/index.html?level=1",
+      "difficulty": "От 4 лет",
+      "levels": [
+        {
+          "title": "Первые шарики",
+          "detail": "Первые цепочки",
+          "difficulty": "easy",
+          "icon": "🌈",
+          "link": "games/marble-shooter/index.html?level=1"
+        },
+        {
+          "title": "Радужная поляна",
+          "detail": "Первые цепочки",
+          "difficulty": "easy",
+          "icon": "🌼",
+          "link": "games/marble-shooter/index.html?level=2"
+        },
+        {
+          "title": "Солнечная дуга",
+          "detail": "Первые цепочки",
+          "difficulty": "easy",
+          "icon": "☀️",
+          "link": "games/marble-shooter/index.html?level=3"
+        },
+        {
+          "title": "Морской поворот",
+          "detail": "Повороты и цвета",
+          "difficulty": "medium",
+          "icon": "🐬",
+          "link": "games/marble-shooter/index.html?level=4"
+        },
+        {
+          "title": "Тайная тропа",
+          "detail": "Повороты и цвета",
+          "difficulty": "medium",
+          "icon": "🍀",
+          "link": "games/marble-shooter/index.html?level=5"
+        },
+        {
+          "title": "Зеркальный сад",
+          "detail": "Повороты и цвета",
+          "difficulty": "medium",
+          "icon": "🪞",
+          "link": "games/marble-shooter/index.html?level=6"
+        },
+        {
+          "title": "Волшебное кольцо",
+          "detail": "Повороты и цвета",
+          "difficulty": "medium",
+          "icon": "🌀",
+          "link": "games/marble-shooter/index.html?level=7"
+        },
+        {
+          "title": "Лесной ручей",
+          "detail": "Для мастеров",
+          "difficulty": "hard",
+          "icon": "🌳",
+          "link": "games/marble-shooter/index.html?level=8"
+        },
+        {
+          "title": "Звёздный вираж",
+          "detail": "Для мастеров",
+          "difficulty": "hard",
+          "icon": "⭐",
+          "link": "games/marble-shooter/index.html?level=9"
+        },
+        {
+          "title": "Мастер шариков",
+          "detail": "Для мастеров",
+          "difficulty": "hard",
+          "icon": "🏆",
+          "link": "games/marble-shooter/index.html?level=10"
+        }
+      ]
     }
   ];
   return Object.freeze(games.map(game => Object.freeze({ ...game, levels: Object.freeze(game.levels) })));

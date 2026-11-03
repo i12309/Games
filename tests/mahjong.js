@@ -55,8 +55,8 @@ assert.equal(rules.freeTile(tiny[3], tiny, new Set()), true, 'topmost tile open'
 assert.equal(rules.freeTile(tiny[0], tiny, new Set([3])), true, 'uncovered side tile open');
 assert.equal(rules.takePair({tiles:tiny, symbols:[0,1,2,3]},new Set(),2,3),null,'mismatched symbols rejected');
 const ids = games.map(g => g.id);
-assert.deepEqual(ids,['coloring','memory','maze','nuts','arrows','hexmerge','mahjong']);
-assert.equal(new Set(ids).size,7);
+assert.deepEqual(ids,['coloring','memory','maze','nuts','arrows','hexmerge','mahjong','marble-shooter']);
+assert.equal(new Set(ids).size,8);
 for (const game of games) {
   assert(fs.existsSync(path.join(root,game.link.split('?')[0])), game.id);
   assert(game.description.length > 30);
@@ -77,4 +77,4 @@ for (const file of ['index.html','games/mahjong/index.html']) {
 const homepage = fs.readFileSync(path.join(root,'index.html'),'utf8');
 assert(homepage.includes('featuredReroll') && homepage.includes('levelGallery'));
 console.log(`PASS Mahjong: ${layouts} solvable layouts, ${moves} paired moves, ${shuffles} shuffles to victory`);
-console.log('PASS catalog: 7 games, correct deep links, all assets Pages-relative');
+console.log('PASS catalog: 8 games, correct deep links, all assets Pages-relative');
