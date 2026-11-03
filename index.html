@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8fbff">
+  <meta name="description" content="Игроланд — простые игры для детей, которыми удобно управлять на планшете.">
+  <title>Игроланд — каталог игр</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="catalog-page">
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Игроланд, главная">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>игроланд<span class="brand-dot">.</span></span>
+      </a>
+      <span class="site-header-note"><span class="status-dot"></span> Маленький домашний проект</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow"><span class="eyebrow-icon">✦</span> ПРИВЕТ, ИССЛЕДОВАТЕЛЬ!</span>
+          <h1>Здесь живут<br><span class="gradient-text">маленькие чудеса</span></h1>
+          <p>Раскрашивай, открывай пары и проходи лабиринты. Все игры придуманы для маленьких пальчиков и большого любопытства.</p>
+          <a class="primary-link" href="games/coloring/index.html?level=heart">Начать раскрашивать <span aria-hidden="true">→</span></a>
+          <div class="hero-features"><span>✓ Без регистрации</span><span>✓ Без рекламы</span><span>✓ Без внешних сервисов</span></div>
+        </div>
+        <div class="hero-paint" aria-hidden="true">
+          <div class="hero-tiles"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="hero-floating-card">
+            <div class="hero-heart-icon">♥</div>
+            <span class="hero-card-title">Творим вместе!</span>
+            <span class="hero-card-small">Цвет за цветом</span>
+          </div>
+          <div class="hero-sparkle hero-sparkle-one">✳</div><div class="hero-sparkle hero-sparkle-two">✦</div>
+        </div>
+      </section>
+
+      <section class="catalog-section" aria-labelledby="games-heading">
+        <div class="section-head">
+          <div><span class="section-kicker">НАШИ ИГРЫ</span><h2 id="games-heading">Во что поиграем?</h2></div>
+          <span class="section-count">3 игры готовы</span>
+        </div>
+        <div class="game-cards">
+          <a class="game-feature-card" href="games/coloring/index.html?level=heart">
+            <div class="game-feature-illustration"><div class="feature-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="feature-big-icon">🎨</span></div>
+            <div class="game-feature-body"><span class="mini-pill green">МОЖНО ИГРАТЬ</span><h3>Раскраска по номерам</h3><p>Находи нужный цвет и раскрашивай клеточки. Можно добавить даже свою фотографию!</p><span class="feature-cta">Открыть игру <span aria-hidden="true">→</span></span></div>
+          </a>
+          <a class="upcoming-card ready-card" href="games/memory/index.html">
+            <div class="upcoming-icon lavender"><span class="card-pair pair-one">🐰</span><span class="card-pair pair-two">🐰</span></div>
+            <span class="mini-pill green">МОЖНО ИГРАТЬ</span><h3>Найди пару</h3><p>Открывай карточки, находи одинаковые картинки и тренируй память.</p><span class="feature-cta">Открыть игру →</span>
+          </a>
+          <a class="upcoming-card ready-card" href="games/maze/index.html">
+            <div class="upcoming-icon peach maze-card-illustration" aria-hidden="true"><span>🐻</span><span class="maze-line">↝</span><span>🍯</span></div>
+            <span class="mini-pill green">МОЖНО ИГРАТЬ</span><h3>Лабиринты</h3><p>Проведи героя к цели. Есть подсказки и три уровня сложности.</p><span class="feature-cta">Открыть игру →</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="catalog-section" aria-labelledby="art-heading">
+        <div class="section-head">
+          <div><span class="section-kicker">УЖЕ В КОРОБОЧКЕ</span><h2 id="art-heading">Готовые раскраски</h2><p class="section-subtitle">От самых простых к более интересным. Нажми на картинку, чтобы начать.</p></div>
+        </div>
+        <div class="art-gallery" id="artGallery"></div>
+      </section>
+    </main>
+    <footer class="site-footer">Игроланд · Игры для любознательных детей · Все рисунки обрабатываются на устройстве</footer>
+  </div>
+  <script src="games/coloring/art-data.js"></script>
+  <script src="assets/catalog.js"></script>
+</body>
+</html>
