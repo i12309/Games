@@ -10,12 +10,12 @@
   document.body.dataset.section=section;document.body.classList.add('has-learning');
   document.addEventListener('DOMContentLoaded',()=>{
     document.querySelectorAll('[data-catalog-section]').forEach(link=>{if(link.dataset.catalogSection===section)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current');});
-    const count=document.getElementById('gameCount');if(count)count.textContent=section==='learn'?`${learn.length} учебные игры`:section==='play'?`${play.length} игр`:`${all.length} игр и занятий`;
-    const head=document.querySelector('.site-header-note');if(head)head.textContent=`${play.length} игр + ${learn.length} учебные мастерские`;
+    const count=document.getElementById('gameCount');if(count)count.textContent=section==='learn'?`${learn.length} учебных игр`:section==='play'?`${play.length} игр`:`${all.length} игр и занятий`;
+    const head=document.querySelector('.site-header-note');if(head)head.textContent=`${play.length} игр + ${learn.length} учебных мастерских`;
     if(section==='learn'){
       document.getElementById('games-heading').textContent='Учимся играя';
       document.getElementById('levels-heading').textContent='Выбери маленькое занятие';
-      document.querySelector('.level-section .section-subtitle').textContent='Числа, чтение, закономерности и маршруты. Начни с простого и двигайся в своём темпе.';
+      document.querySelector('.level-section .section-subtitle').textContent='Числа, чтение, покупки, письма, фигуры и маршруты. Выбирай занятие и двигайся в своём темпе.';
     }
     document.querySelectorAll('#gameCards>a').forEach(card=>{
       const game=learn.find(g=>card.getAttribute('href')===g.link);if(!game)return;
