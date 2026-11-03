@@ -5,7 +5,8 @@
   const COLORS={2:['#f341a7','#b71d70'],4:['#6bc64b','#369233'],8:['#28b3c8','#15718e'],16:['#4b88f7','#2451bc'],32:['#ef8546','#c84e28'],64:['#8e69e5','#5d42ba'],128:['#edc841','#b98e18'],256:['#fe6180','#bf284a'],512:['#40ceae','#22967a'],1024:['#ffb247','#be792c'],2048:['#dfb0ff','#9753c1']};
   const labels={easy:'Легко',normal:'Средне',hard:'Сложно'};
   const saved=app.read('hexmerge.progress.v1',{});
-  let mode=saved?.mode in rules.MODES?saved.mode:'easy';
+  const requestedLevel=new URLSearchParams(location.search).get('level');
+  let mode=Object.hasOwn(rules.MODES, requestedLevel)?requestedLevel:(saved?.mode in rules.MODES?saved.mode:'easy');
   let sessions=saved?.sessions&&typeof saved.sessions==='object'?saved.sessions:{};
   let best=app.read('hexmerge.records.v1',{})||{},history=[],state=null,hint=null,animation=null,seed=0;
   const copy=s=>({board:s.board.map(row=>row.slice()),score:s.score,moves:s.moves,bestTile:s.bestTile,won:s.won});

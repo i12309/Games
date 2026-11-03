@@ -17,7 +17,8 @@
   if (!sessions || typeof sessions !== 'object' || Array.isArray(sessions)) sessions = {};
   let best = app.read('maze.best.v1', {});
   if (!best || typeof best !== 'object' || Array.isArray(best)) best = {};
-  let difficulty = app.read('maze.difficulty', 'easy');
+  const requestedLevel = new URLSearchParams(location.search).get('level');
+  let difficulty = Object.hasOwn(MODES, requestedLevel) ? requestedLevel : app.read('maze.difficulty', 'easy');
   if (!MODES[difficulty]) difficulty = 'easy';
   let state = null;
   let hintCell = null;

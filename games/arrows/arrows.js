@@ -5,7 +5,8 @@ const COLORS=['#32e66d','#58dfff','#f6c633','#f95da9','#9e61f1','#368bf0','#f78e
 let level=1,variant=0,board=null,remaining=[],history=[],moves=0,hearts=3,hints=0,win=false,lose=false,flash=-1,hintId=-1,animation=null,frame=0;
 let zoom=1,panX=0,panY=0,viewW=800,viewH=560,dpr=1;
 let progress=app.read('arrows.progress.v1',{})||{},sessions=progress.sessions&&typeof progress.sessions==='object'?progress.sessions:{};
-level=Number.isInteger(progress.level)&&progress.level>=1?Math.min(100,progress.level):1;
+const requestedLevel=Number(new URLSearchParams(location.search).get('level'));
+level=Number.isInteger(requestedLevel)&&requestedLevel>=1&&requestedLevel<=100?requestedLevel:(Number.isInteger(progress.level)&&progress.level>=1?Math.min(100,progress.level):1);
 const pointers=new Map();let pinch=null,interaction=null;
 const say=s=>{$('gameMessage').textContent=s;};
 const cloneIds=()=>remaining.slice();

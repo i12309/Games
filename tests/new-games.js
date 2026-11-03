@@ -76,7 +76,7 @@ function testHex(){
  console.log('PASS hex: 120 runs to goal, gravity/refill, merges, chain scores');
 }
 function testLinks(){
- const pages=['index.html',...['coloring','memory','maze','nuts','arrows','hexmerge'].map(n=>`games/${n}/index.html`)];
+ const pages=['index.html',...['coloring','memory','maze','nuts','arrows','hexmerge','mahjong'].map(n=>`games/${n}/index.html`)];
  for(const p of pages){
   const file=path.join(root,p),html=fs.readFileSync(file,'utf8'),dir=path.dirname(file);
   for(const match of html.matchAll(/(?:href|src)="([^"]+)"/g)){
@@ -88,9 +88,11 @@ function testLinks(){
   }
  }
  const catalog=fs.readFileSync(path.join(root,'index.html'),'utf8');
- for(const name of ['coloring','memory','maze','nuts','arrows','hexmerge'])assert(catalog.includes(`games/${name}/index.html`));
+ const registry=fs.readFileSync(path.join(root,'assets/game-registry.js'),'utf8');
+ assert(catalog.includes('assets/game-registry.js'));
+ for(const name of ['coloring','memory','maze','nuts','arrows','hexmerge','mahjong'])assert(registry.includes(`games/${name}/index.html`));
  assert(fs.existsSync(path.join(root,'.nojekyll')));
- console.log('PASS Pages: all local relative links exist, six games listed, nojekyll available');
+ console.log('PASS Pages: all local relative links exist, seven games registered, nojekyll available');
 }
 testNuts();testArrows();testHex();testLinks();
 console.log(`PASS: ${validations} assertions/workflow steps across new games`);

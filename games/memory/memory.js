@@ -20,7 +20,8 @@
   if (!sessions || typeof sessions !== 'object' || Array.isArray(sessions)) sessions = {};
   let best = app.read('memory.best.v1', {});
   if (!best || typeof best !== 'object' || Array.isArray(best)) best = {};
-  let difficulty = app.read('memory.difficulty', 'easy');
+  const requestedLevel = new URLSearchParams(location.search).get('level');
+  let difficulty = Object.hasOwn(levels, requestedLevel) ? requestedLevel : app.read('memory.difficulty', 'easy');
   if (!levels[difficulty]) difficulty = 'easy';
   let state = null;
   let selected = [];

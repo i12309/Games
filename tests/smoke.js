@@ -72,7 +72,7 @@ function createHarness(game, store = new Map()) {
   };
   const window = { Igroland: app, addEventListener: (name, cb) => { (windowListeners[name] ||= []).push(cb); }, devicePixelRatio: 1 };
   if (game === 'maze') window.ResizeObserver = class { observe() {} };
-  const ctx = vm.createContext({ window, document: doc, console, setTimeout: cb => { timeouts.push(cb); return timeouts.length; }, clearTimeout: () => {}, setInterval: cb => { intervals.push(cb); return intervals.length; }, Math, Number, Map, Set, JSON });
+  const ctx = vm.createContext({ window, document: doc, console, setTimeout: cb => { timeouts.push(cb); return timeouts.length; }, clearTimeout: () => {}, setInterval: cb => { intervals.push(cb); return intervals.length; }, Math, Number, Map, Set, JSON, URLSearchParams, location: { search: '' } });
   const source = fs.readFileSync(path.join(root, 'games', game, game + '.js'), 'utf8');
   vm.runInContext(source, ctx, {filename: game + '.js', timeout: 10000});
   return { app, store, el, levels, arrows, timeouts, intervals, ids, windowListeners,

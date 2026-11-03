@@ -8,7 +8,8 @@
   const SAVE='nuts.progress.v1';
   let saved=app.read(SAVE,{});if(!saved||typeof saved!=='object')saved={};
   let sessions=saved.sessions&&typeof saved.sessions==='object'?saved.sessions:{};
-  let level=Number.isInteger(saved.level)&&saved.level>0?Math.min(saved.level,999):1;
+  const requestedLevel=Number(new URLSearchParams(location.search).get('level'));
+  let level=Number.isInteger(requestedLevel)&&requestedLevel>=1&&requestedLevel<=999?requestedLevel:(Number.isInteger(saved.level)&&saved.level>0?Math.min(saved.level,999):1);
   let state=[],initial=[],history=[],solution=[],selected=null,hint=null,solved=false,request=0,worker=null;
   const clone=x=>x.map(s=>s.slice());
   const currentKey=x=>JSON.stringify(x);
