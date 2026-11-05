@@ -3,7 +3,7 @@
   const games = window.IGROLAND_GAME_REGISTRY || [];
   const coloring = window.PIXEL_LEVELS || [];
   const $ = id => document.getElementById(id);
-  const artDifficulty = { easy: 'Легко', medium: 'Средне', hard: 'Посложнее' };
+  const artDifficulty = { easy: 'Легко', medium: 'Средне', hard: 'Сложно', expert: 'Очень сложно', master: 'Эксперт' };
   const randomIndex = count => Math.floor(Math.random() * count);
   const mix = array => {
     const shuffled = array.slice();

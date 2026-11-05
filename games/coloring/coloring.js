@@ -26,7 +26,9 @@
   let preview = false, history = [], saveTimer = null;
   let vw = 1, vh = 1, cellBase = 20, scheduled = false;
   let sourceImage = null, sourceFileName = '', sourceUrl = null;
-  let toastTimer = null;
+  let toastTimer = null, hudScheduled = false;
+  let remainingCounts = new Uint32Array(0);
+  const difficultyLabels = {easy:'Легко',medium:'Средне',hard:'Сложно',expert:'Очень сложно',master:'Эксперт',custom:'Моя загрузка'};
   const pointers = new Map();
   let draggingMode = '', lastPointer = null, gesture = null, suppressTouchPaint = false;
 
@@ -80,7 +82,7 @@
   function progressOf(def) {
     const values=loadPainted(def);let count=0,all=0;
     def.cells.forEach((c,i)=>{if(c>=0){all++;count+=values[i]}});
-    return all?Math.round(100*count/all):0;
+    return all?Math.floor(100*count/all):0;
   }
   function toast(message) {
     els.toast.textContent=message;
@@ -106,10 +108,12 @@
   }
   function renderLevelList() {
     els.levels.replaceChildren();
-    for(const def of definitions) {
+    const filter = $('#difficultyFilter')?.value || 'all';
+    const visibleDefs = definitions.filter(def => filter==='all' || def.difficulty===filter || def.id===current?.id);
+    for(const def of visibleDefs) {
       const button=document.createElement('button');
       button.className='level-button'+(current?.id===def.id?' active':'');
-      button.type='button';button.dataset.id=def.id;
+      button.type='button';button.dataset.id=def.id;button.title=`${def.title} · ${def.width}×${def.height} · ${def.colors.length} цветов`;
       button.setAttribute('aria-pressed',String(current?.id===def.id));
       const image=document.createElement('div');image.className='level-image';
       const canvas=document.createElement('canvas');canvas.setAttribute('aria-hidden','true');image.append(canvas);
@@ -117,14 +121,19 @@
       const name=document.createElement('span');name.className='level-name';name.textContent=def.title;
       const status=document.createElement('span');status.className='level-meta';
       const percent=progressOf(def);
-      status.textContent=percent ? `Раскрашено ${percent}%` : (def.difficulty==='easy'?'Легко':def.difficulty==='hard'?'Посложнее':def.difficulty==='custom'?'Моя загрузка':'Средне');
+      status.textContent=percent ? `Раскрашено ${percent}%` : (difficultyLabels[def.difficulty] || 'Средне');
       if (percent===100) status.classList.add('level-finished');
       body.append(name,status);button.append(image,body);
       button.addEventListener('click',()=>chooseLevel(def.id));
       els.levels.append(button);
     }
     requestAnimationFrame(()=>{
-      els.levels.querySelectorAll('canvas').forEach((canvas,i)=>drawThumb(canvas,definitions[i]));
+      els.levels.querySelectorAll('canvas').forEach((canvas,i)=>drawThumb(canvas,visibleDefs[i]));
+      const active=els.levels.querySelector('.active');
+      if(active){
+        if(els.levels.scrollWidth>els.levels.clientWidth+2)els.levels.scrollLeft=Math.max(0,active.offsetLeft-(els.levels.clientWidth-active.offsetWidth)/2);
+        else els.levels.scrollTop=Math.max(0,active.offsetTop-(els.levels.clientHeight-active.offsetHeight)/2);
+      }
     });
   }
   function updateLevelProgress() {
@@ -132,7 +141,7 @@
     if (!button) return;
     const el=button.querySelector('.level-meta');
     if (el) {
-      el.textContent=`Раскрашено ${Math.round(100*filledCount/Math.max(1,totalCount))}%`;
+      el.textContent=`Раскрашено ${Math.floor(100*filledCount/Math.max(1,totalCount))}%`;
       el.classList.toggle('level-finished',filledCount===totalCount);
     }
   }
@@ -146,6 +155,8 @@
     painted=loadPainted(current);
     totalCount=0;filledCount=0;
     current.cells.forEach((c,i)=>{if(c>=0){totalCount++;if(painted[i])filledCount++;}});
+    rebuildRemaining();
+    if ($('#paintingDetails')) $('#paintingDetails').textContent=`${difficultyLabels[current.difficulty] || ''} · ${current.width}×${current.height} · ${current.colors.length} цветов · ${totalCount} клеток`;
     selectedColor=Math.max(0,current.colors.findIndex((_,i)=>remainingColor(i)>0));
     zoom=1;panX=0;panY=0;preview=false;history=[];
     els.complete.hidden=true;
@@ -159,10 +170,15 @@
     els.zoom.textContent='100%';
   }
   function historyReplace(href) {try {window.history.replaceState(null,'',href);}catch{}}
-  function remainingColor(colorIndex) {
-    let left=0;
-    for(let i=0;i<current.cells.length;i++) if(current.cells[i]===colorIndex && !painted[i])left++;
-    return left;
+  function rebuildRemaining() {
+    remainingCounts = new Uint32Array(current.colors.length);
+    current.cells.forEach((color,index)=>{if(color>=0 && !painted[index]) remainingCounts[color]++;});
+  }
+  function remainingColor(colorIndex) { return remainingCounts[colorIndex] || 0; }
+  function queueHUD() {
+    if(hudScheduled)return;
+    hudScheduled=true;
+    requestAnimationFrame(()=>{hudScheduled=false;updateStatus();renderPalette();});
   }
   function renderPalette() {
     els.palette.replaceChildren();
@@ -188,7 +204,7 @@
     });
   }
   function updateStatus() {
-    const percent=totalCount?Math.round(filledCount/totalCount*100):0;
+    const percent=totalCount?Math.floor(filledCount/totalCount*100):0;
     els.percent.textContent=percent+'%';
     els.progress.setAttribute('aria-valuenow',String(percent));
     els.bar.style.width=percent+'%';
@@ -209,10 +225,10 @@
       return;
     }
     painted[idx]=1;history.push(idx);
-    if(history.length>5000)history.shift();
+    if(history.length>Math.max(5000,current.cells.length))history.shift();
     filledCount++;
-    updateStatus();
-    renderPalette();
+    remainingCounts[current.cells[idx]]--;
+    queueHUD();
     scheduleSave();
     queueDraw();
     if(filledCount===totalCount) {
@@ -223,7 +239,7 @@
   function undo() {
     const idx=history.pop();
     if(idx===undefined)return;
-    if(painted[idx]) {painted[idx]=0;filledCount--;}
+    if(painted[idx]) {painted[idx]=0;filledCount--;remainingCounts[current.cells[idx]]++;}
     els.complete.hidden=true;
     selectedColor=current.cells[idx];
     updateStatus();renderPalette();scheduleSave();queueDraw();
@@ -310,7 +326,7 @@
   }
   function zoomAt(nextZoom,at) {
     if(!current)return;
-    const z=clamp(nextZoom,1,7);
+    const z=clamp(nextZoom,1,24);
     const b=boundsForZoom();
     const px=(at.x-b.left)/b.size, py=(at.y-b.top)/b.size;
     zoom=z;
@@ -337,7 +353,7 @@
     const [a,b]=[...pointers.values()];
     const halfway=midpoint(a,b);
     const mid=pointInCanvas(halfway.x,halfway.y);
-    zoom=clamp(gesture.zoom*distance(a,b)/gesture.distance,1,7);
+    zoom=clamp(gesture.zoom*distance(a,b)/gesture.distance,1,24);
     const s=cellBase*zoom;
     panX=mid.x-gesture.gx*s-(vw-current.width*s)/2;
     panY=mid.y-gesture.gy*s-(vh-current.height*s)/2;
@@ -508,6 +524,8 @@
   $('#zoomIn').addEventListener('click',()=>zoomBy(1.25));
   $('#zoomOut').addEventListener('click',()=>zoomBy(.8));
   $('#zoomFit').addEventListener('click',fit);
+  $('#zoomReadable')?.addEventListener('click',()=>zoomAt(Math.max(1,32/cellBase),{x:vw/2,y:vh/2}));
+  $('#difficultyFilter')?.addEventListener('change',renderLevelList);
   els.preview.addEventListener('click',()=>{
     preview=!preview;
     els.preview.setAttribute('aria-pressed',String(preview));
@@ -519,7 +537,7 @@
   els.reset.addEventListener('click',()=>{
     if(!current || filledCount===0)return;
     if(!confirm('Очистить все раскрашенные клетки этой картинки?'))return;
-    painted.fill(0);filledCount=0;history=[];selectedColor=0;preview=false;
+    painted.fill(0);filledCount=0;history=[];selectedColor=0;preview=false;rebuildRemaining();
     els.preview.setAttribute('aria-pressed','false');els.complete.hidden=true;
     updateStatus();renderPalette();queueDraw();saveNow();
     toast('Можно раскрашивать сначала');
